@@ -11,8 +11,9 @@
   "dependencies": {
     "js-yaml": "^3.12.0",
     "ouch-rx": "^1.1.2",
-    "pouchdb-core": "^7.0.0",
     "pouchdb-adapter-http": "^7.0.0",
-    "rxjs": "^6.2.2"
+    "pouchdb-core": "^7.0.0",
+    "rxjs": "^6.2.2",
+    "yargs": "^12.0.1"
   }
 }
