@@ -12,7 +12,7 @@ const {
 const path = require('path')
 const fetch = require('node-fetch')
 const readFileRx = rx.bindNodeCallback(fs.readFile)
-
+const parameters = require('yargs').option('db',{alias:'d',default:'https://command-center.agrzes.pl:6984/reminders'}).argv
 const https = require('https')
 
 const agent = new https.Agent({
@@ -20,7 +20,7 @@ const agent = new https.Agent({
   cert: fs.readFileSync('/mnt/wgb/ca/secret.crt')
 })
 
-const db = new PouchDB('https://command-center.agrzes.pl:6984/reminders', {
+const db = new PouchDB(parameters.db, {
   fetch(url, options) {
     return fetch(url, { ...options,
       agent
