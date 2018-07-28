@@ -16,6 +16,7 @@ const parameters = require('yargs')
   .option('db',{alias:'d',default:'https://command-center.agrzes.pl:6984/reminders'})
   .option('key',{alias:'k',default:'/mnt/wgb/ca/secret.key'})
   .option('cert',{alias:'c',default:'/mnt/wgb/ca/secret.crt'})
+  .option('dir',{alias:'f',default:path.join(__dirname, 'data')})
   .argv
 const https = require('https')
 
@@ -32,10 +33,10 @@ const db = new PouchDB(parameters.db, {
   }
 })
 
-rx.bindNodeCallback(fs.readdir)(path.join(__dirname, 'data'))
+rx.bindNodeCallback(fs.readdir)(parameters.dir)
   .pipe(
     flatMap((files) => rx.of(...files)),
-    map((file) => path.join(__dirname, 'data', file)),
+    map((file) => path.join(parameters.dir, file)),
     flatMap((file) => readFileRx(file, 'UTF-8')),
     flatMap((content) => rx.of(...yaml.safeLoadAll(content))),
     new Ouch(db).merge((object, existing) => ({ ...object,
