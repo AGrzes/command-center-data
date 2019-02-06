@@ -1,8 +1,11 @@
-import {exists} from 'fs'
+import {exists,readFile} from 'fs'
 import {resolve,dirname} from 'path'
 import {homedir} from 'os'
 import { promisify } from 'util'
+import {Config} from './model/config'
+import {safeLoad} from 'js-yaml'
 const existPromise = promisify(exists)
+const readFilePromise = promisify(readFile)
 export function lookupConfig(name: string, startDir: string = process.cwd()): Promise<string[]> {
   startDir = resolve(startDir)
   const walk = (dir: string): string[] => {
@@ -22,4 +25,9 @@ export function lookupConfig(name: string, startDir: string = process.cwd()): Pr
     dirs.map((dir) => resolve(dir,name))
     .map((dir) => existPromise(dir).then((exist): string|boolean => exist? dir: false)))
     .then((dirs: Array<string|boolean>):string[] => dirs.filter((dir) => dir) as string[])
+}
+
+
+export function loadConfig(startDir: string = process.cwd()): Promise<Config[]> {
+  return lookupConfig('.yellow/config.yaml',startDir).then((files) => Promise.all(files.map((file) => readFilePromise(file,'UTF-8').then(safeLoad) )))
 }
