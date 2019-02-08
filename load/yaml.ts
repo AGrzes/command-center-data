@@ -5,7 +5,7 @@ import { flatMap } from 'rxjs/operators'
 export const yaml: () => OperatorFunction<string, object[]> = () =>
   (source: Observable<string>) => source.pipe(flatMap((content) => {
     if (content.startsWith('---\n')) {
-      return of(safeLoadAll(content))
+      return of(...safeLoadAll(content))
     } else {
       return of(safeLoad(content))
     }
