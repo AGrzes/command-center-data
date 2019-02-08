@@ -11,6 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "js-yaml": "^3.12.0",
+    "lodash": "^4.17.11",
     "ouch-rx": "^1.1.2",
     "pouchdb-adapter-http": "^7.0.0",
     "pouchdb-core": "^7.0.0",
@@ -21,7 +22,9 @@
   },
   "devDependencies": {
     "@types/js-yaml": "^3.12.0",
+    "@types/lodash": "^4.14.120",
     "@types/node": "^10.12.21",
+    "@types/pouchdb-core": "^7.0.0",
     "tslint": "^5.12.1"
   }
 }
