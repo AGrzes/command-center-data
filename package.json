@@ -13,7 +13,7 @@
     "debug": "^4.1.1",
     "js-yaml": "^3.12.0",
     "lodash": "^4.17.11",
-    "ouch-rx": "^2.0.4",
+    "ouch-rx": "^2.1.0",
     "pouchdb-adapter-http": "^7.0.0",
     "pouchdb-core": "^7.0.0",
     "rxjs": "^6.4.0",
